@@ -13,6 +13,8 @@ import sqlancer.common.gen.TypedExpressionGenerator;
 import sqlancer.hsqldb.HSQLDBProvider;
 import sqlancer.hsqldb.HSQLDBSchema;
 import sqlancer.hsqldb.ast.*;
+import sqlancer.hsqldb.ast.HSQLDBUnaryPostfixOperation;
+import sqlancer.hsqldb.ast.HSQLDBUnaryPrefixOperation;
 
 public final class HSQLDBExpressionGenerator extends
         TypedExpressionGenerator<Node<HSQLDBExpression>, HSQLDBSchema.HSQLDBColumn, HSQLDBSchema.HSQLDBCompositeDataType> {
@@ -50,8 +52,7 @@ public final class HSQLDBExpressionGenerator extends
 //        }
         switch (type.getType()) {
         case NULL:
-            return HSQLDBConstant.createNullConstant();
-        case CHAR:
+            return HSQLDBConstant.createNullConstant();case CHAR:
             return HSQLDBConstant.HSQLDBTextConstant
                     .createStringConstant(hsqldbGlobalState.getRandomly().getAlphabeticChar(), type.getSize());
         case VARCHAR:
