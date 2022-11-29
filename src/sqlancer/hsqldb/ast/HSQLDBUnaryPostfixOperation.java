@@ -44,6 +44,7 @@ public class HSQLDBUnaryPostfixOperation extends NewUnaryPostfixOperatorNode<HSQ
         public abstract HSQLDBSchema.HSQLDBDataType[] getInputDataTypes();
 
     }
+
     public Node<HSQLDBExpression> getExpression() {
         return getExpr();
     }

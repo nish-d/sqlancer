@@ -41,7 +41,7 @@ public final class HSQLDBUpdateGenerator {
             if (Randomly.getBooleanWithSmallProbability()) {
                 sb.append(" WHERE ");
                 expr = gen.generateExpression(columns.get(i).getType());
-             //HSQLDBErrors.addExpressionErrors(errors);
+                // HSQLDBErrors.addExpressionErrors(errors);
             } else {
                 expr = gen.generateConstant(columns.get(i).getType());
             }
