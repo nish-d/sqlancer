@@ -52,8 +52,8 @@ public class HSQLDBQueryPartitioningBase
         List<TableReferenceNode<HSQLDBExpression, HSQLDBSchema.HSQLDBTable>> tableList = targetTables.stream()
                 .map(t -> new TableReferenceNode<HSQLDBExpression, HSQLDBSchema.HSQLDBTable>(t))
                 .collect(Collectors.toList());
-        //List<Node<HSQLDBExpression>> joins = HSQLDBJoin.getJoins(tableList, state);
-        //select.setJoinList(joins.stream().collect(Collectors.toList()));
+        // List<Node<HSQLDBExpression>> joins = HSQLDBJoin.getJoins(tableList, state);
+        // select.setJoinList(joins.stream().collect(Collectors.toList()));
         select.setFromList(tableList.stream().collect(Collectors.toList()));
         select.setWhereClause(null);
 

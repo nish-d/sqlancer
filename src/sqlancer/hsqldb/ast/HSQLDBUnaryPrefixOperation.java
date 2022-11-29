@@ -29,7 +29,7 @@ public class HSQLDBUnaryPrefixOperation extends NewUnaryPrefixOperatorNode<HSQLD
             public HSQLDBSchema.HSQLDBDataType getExpressionType() {
                 return HSQLDBSchema.HSQLDBDataType.INTEGER;
             }
-            },
+        },
         UNARY_MINUS("-", HSQLDBSchema.HSQLDBDataType.INTEGER) {
             @Override
             public HSQLDBSchema.HSQLDBDataType getExpressionType() {
@@ -38,11 +38,11 @@ public class HSQLDBUnaryPrefixOperation extends NewUnaryPrefixOperatorNode<HSQLD
         };
 
         private String textRepresentation;
-        //private HSQLDBSchema.HSQLDBDataType[] dataTypes;
+        // private HSQLDBSchema.HSQLDBDataType[] dataTypes;
 
         HSQLDBUnaryPrefixOperator(String textRepresentation, HSQLDBSchema.HSQLDBDataType... dataTypes) {
             this.textRepresentation = textRepresentation;
-            //this.dataTypes = dataTypes.clone();
+            // this.dataTypes = dataTypes.clone();
         }
 
         public abstract HSQLDBSchema.HSQLDBDataType getExpressionType();
