@@ -38,11 +38,9 @@ public class HSQLDBUnaryPrefixOperation extends NewUnaryPrefixOperatorNode<HSQLD
         };
 
         private String textRepresentation;
-        // private HSQLDBSchema.HSQLDBDataType[] dataTypes;
 
         HSQLDBUnaryPrefixOperator(String textRepresentation, HSQLDBSchema.HSQLDBDataType... dataTypes) {
             this.textRepresentation = textRepresentation;
-            // this.dataTypes = dataTypes.clone();
         }
 
         public abstract HSQLDBSchema.HSQLDBDataType getExpressionType();
