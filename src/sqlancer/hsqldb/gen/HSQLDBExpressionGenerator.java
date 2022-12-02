@@ -49,9 +49,6 @@ public final class HSQLDBExpressionGenerator extends
 
     @Override
     public Node<HSQLDBExpression> generateConstant(HSQLDBSchema.HSQLDBCompositeDataType type) {
-        // if (type.getType() == HSQLDBSchema.HSQLDBDataType.NULL || Randomly.getBooleanWithSmallProbability()) {
-        // return HSQLDBConstant.createNullConstant();
-        // }
         switch (type.getType()) {
         case NULL:
             return HSQLDBConstant.createNullConstant();
@@ -147,7 +144,6 @@ public final class HSQLDBExpressionGenerator extends
 
     public enum HSQLDBDBBinaryComparisonOperator implements BinaryOperatorNode.Operator {
         EQUALS("="), GREATER(">"), GREATER_EQUALS(">="), SMALLER("<"), SMALLER_EQUALS("<="), NOT_EQUALS("!=");
-        // LIKE("LIKE"), NOT_LIKE("NOT LIKE");
 
         private String textRepr;
 
