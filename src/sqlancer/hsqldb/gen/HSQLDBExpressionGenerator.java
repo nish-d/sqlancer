@@ -12,7 +12,9 @@ import sqlancer.common.ast.newast.Node;
 import sqlancer.common.gen.TypedExpressionGenerator;
 import sqlancer.hsqldb.HSQLDBProvider;
 import sqlancer.hsqldb.HSQLDBSchema;
-import sqlancer.hsqldb.ast.*;
+import sqlancer.hsqldb.ast.HSQLDBColumnReference;
+import sqlancer.hsqldb.ast.HSQLDBConstant;
+import sqlancer.hsqldb.ast.HSQLDBExpression;
 import sqlancer.hsqldb.ast.HSQLDBUnaryPostfixOperation;
 import sqlancer.hsqldb.ast.HSQLDBUnaryPrefixOperation;
 
@@ -47,12 +49,13 @@ public final class HSQLDBExpressionGenerator extends
 
     @Override
     public Node<HSQLDBExpression> generateConstant(HSQLDBSchema.HSQLDBCompositeDataType type) {
-//        if (type.getType() == HSQLDBSchema.HSQLDBDataType.NULL || Randomly.getBooleanWithSmallProbability()) {
-//            return HSQLDBConstant.createNullConstant();
-//        }
+        // if (type.getType() == HSQLDBSchema.HSQLDBDataType.NULL || Randomly.getBooleanWithSmallProbability()) {
+        // return HSQLDBConstant.createNullConstant();
+        // }
         switch (type.getType()) {
         case NULL:
-            return HSQLDBConstant.createNullConstant();case CHAR:
+            return HSQLDBConstant.createNullConstant();
+        case CHAR:
             return HSQLDBConstant.HSQLDBTextConstant
                     .createStringConstant(hsqldbGlobalState.getRandomly().getAlphabeticChar(), type.getSize());
         case VARCHAR:
@@ -83,7 +86,8 @@ public final class HSQLDBExpressionGenerator extends
 
     @Override
     protected Node<HSQLDBExpression> generateExpression(HSQLDBSchema.HSQLDBCompositeDataType type, int depth) {
-        if (depth >= hsqldbGlobalState.getOptions().getMaxExpressionDepth() || Randomly.getBooleanWithSmallProbability()) {
+        if (depth >= hsqldbGlobalState.getOptions().getMaxExpressionDepth()
+                || Randomly.getBooleanWithSmallProbability()) {
             return generateLeafNode(type);
         }
 
@@ -95,16 +99,17 @@ public final class HSQLDBExpressionGenerator extends
         switch (expr) {
         case BINARY_LOGICAL:
         case BINARY_ARITHMETIC:
-                op = HSQLDBExpressionGenerator.HSQLDBBinaryLogicalOperator.getRandom();
+            op = HSQLDBExpressionGenerator.HSQLDBBinaryLogicalOperator.getRandom();
             break;
         case BINARY_COMPARISON:
             op = HSQLDBDBBinaryComparisonOperator.getRandom();
             break;
-            default:
+        default:
             throw new AssertionError();
         }
 
-        return new NewBinaryOperatorNode<>(generateExpression(type, depth + 1), generateExpression(type, depth + 1), op);
+        return new NewBinaryOperatorNode<>(generateExpression(type, depth + 1), generateExpression(type, depth + 1),
+                op);
 
     }
 
@@ -142,7 +147,7 @@ public final class HSQLDBExpressionGenerator extends
 
     public enum HSQLDBDBBinaryComparisonOperator implements BinaryOperatorNode.Operator {
         EQUALS("="), GREATER(">"), GREATER_EQUALS(">="), SMALLER("<"), SMALLER_EQUALS("<="), NOT_EQUALS("!=");
-        //LIKE("LIKE"), NOT_LIKE("NOT LIKE");
+        // LIKE("LIKE"), NOT_LIKE("NOT LIKE");
 
         private String textRepr;
 
